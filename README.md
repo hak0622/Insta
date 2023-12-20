@@ -21,7 +21,9 @@
 
 ###  4. 사용 기술
 • 웹 개발 : HTML, CSS, JavaScript
+
 • DB : sqllite
+
 • 크롤링 : chrome web driver
 
 ----------------------
@@ -32,6 +34,22 @@
 3. 웹 페이지 접속 : 웹 브라우저에 http://localhost:8000 주소로 접속하여 이용할 수 있습니다.
 
 ----------------------
+###  6. 구현 화면(UI)
+
+![image](https://github.com/hak0622/Insta/assets/128469147/431ee168-65f4-4216-a6a5-f66363bb9609)
+
+![image](https://github.com/hak0622/Insta/assets/128469147/12db0d40-cd3f-4540-b7de-7df189121071)
+
+![image](https://github.com/hak0622/Insta/assets/128469147/a1726df5-cbb7-463f-a8b4-5c209ecaaf0c)
+
+![image](https://github.com/hak0622/Insta/assets/128469147/e4299557-b239-4bcb-bf24-0db1d8035c5c)
+
+![image](https://github.com/hak0622/Insta/assets/128469147/5cb0c3f1-2ef5-4391-9c9b-c3f0557d1017)
+
+![image](https://github.com/hak0622/Insta/assets/128469147/785430a5-1d09-461d-be67-0ab05c6eca71)
+
+----------------------
+
 *주의 사항*
 
 프로젝트는 웹 크롤링을 통해 수집한 이미지의 인터넷 경로를 DB에 저장하는 방식을 사용합니다. 따라서, 원본 사진에 접근이 불가능한 경우나 해당 경로가 변경된 경우, 이미지가 제대로 보이지 않을 수 있습니다. 이런 상황이 발생하면, 크롤링 과정을 다시 진행하여 DB를 업데이트해야 합니다. 이 점을 참고하여 프로젝트를 사용해주시기 바랍니다.
