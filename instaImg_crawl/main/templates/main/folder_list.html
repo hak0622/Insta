@@ -1,0 +1,28 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+  <div style="color: black;">
+    <ul class="folder-list">
+      {% for folder_name in folder_names %}
+
+        <li class="folder-item">
+          <a href="{% url 'main:show_folder_images' folder_name=folder_name %}" class="folder-link">
+            <img src="https://cdn-icons-png.flaticon.com/128/3767/3767094.png" alt="폴더 로고" class="folder-icon">
+          </a>
+          <p class="folder-name">{{ folder_name }}</p>
+
+          <style>
+          #accountInput {
+          display: none; /* 입력 필드 감추기 */
+          }
+
+          button[type="submit"] {
+          display: none; /* 입력 필드와 버튼 감추기 */
+          }
+          </style>
+
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

@@ -1,0 +1,11 @@
+<!-- main/templates/main/show_folder_images.html -->
+{% extends 'main/base.html' %}
+
+{% block content %}
+  <h1>{{ folder_name }} 폴더의 이미지 목록</h1>
+  <div id="folderImageGallery" style="margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: space-around; padding: 10px;">
+    {% for base64_image in image_list %}
+      <img src="data:image/jpeg;base64,{{ base64_image }}" alt="{{ folder_name }} Image" style="width: calc(33.33% - 10px); margin-bottom: 10px; box-sizing: border-box; border: 2px solid #fff; object-fit: cover; max-height: 100%;">
+    {% endfor %}
+  </div>
+{% endblock %}

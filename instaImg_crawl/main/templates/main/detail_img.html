@@ -1,0 +1,9 @@
+{%extends 'main/base.html'%}
+{%block content%}
+  {%for key,value in posts.items %}
+  <div class="post">
+    <img src="{{key}}" width="100px" height="100px">
+    <h1>{{value|striptags|cut:'['|cut:']'|cut:','}}</h1>
+  </div>
+  {%endfor%}
+{%endblock%}

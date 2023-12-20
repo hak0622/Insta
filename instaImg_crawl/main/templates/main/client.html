@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery</title>
+
+    <style>
+        /* 추가된 CSS 스타일 */
+        #imageContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px; /* 이미지 간격 조절 */
+        }
+
+        .imageWrapper {
+            flex: 0 0 calc(25% - 20px); /* 3장씩 나오도록 설정 (여기서 20px는 간격) */
+            margin-bottom: 20px; /* 이미지 아래 여백 조절 */
+            transition: transform 0.3s ease; /* transform 속성에 대한 애니메이션 설정 */
+        }
+
+        .imageWrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+            cursor: pointer; /* 이미지에 커서를 포인터로 설정하여 클릭 가능하게 만듭니다. */
+        }
+
+        .selected img {
+            transform: scale(0.9); /* 선택된 이미지의 크기를 줄임 */
+        }
+    </style>
+</head>
+<body>
+
+<!-- 검색 창 추가 -->
+<label for="keywordInput">Enter Keyword:</label>
+<input type="text" id="keywordInput" oninput="loadImages()">
+
+<!-- 이미지 표시 영역 -->
+<div id="imageContainer"></div>
+
+<script>
+    // 검색어에 해당하는 모든 이미지 표시
+    function loadImages() {
+        const keywordInput = document.getElementById('keywordInput');
+        const searchKeyword = keywordInput.value.trim().toLowerCase(); // 검색어를 소문자로 변환 및 앞뒤 공백 제거
+
+        const imageContainer = document.getElementById('imageContainer');
+
+        fetch('/api/get-photos/')
+            .then(response => response.json())
+            .then(data => {
+                const matchingPhotos = searchKeyword ?
+                    data.filter(photo => photo.keyword.toLowerCase().includes(searchKeyword)) :
+                    [];  // 검색어가 없을 경우 빈 배열
+
+                // 이미지 컨테이너 초기화
+                imageContainer.innerHTML = '';
+
+                if (matchingPhotos.length > 0) {
+                    matchingPhotos.forEach(photo => {
+                        // 이미지를 감싸는 div 추가
+                        const imageWrapper = document.createElement('div');
+                        imageWrapper.classList.add('imageWrapper');
+
+                        // 이미지 엘리먼트 생성
+                        const imgElement = document.createElement('img');
+                        imgElement.src = `/api/proxy-instagram-image/${encodeURIComponent(photo.image_src)}/`;
+                        imgElement.alt = photo.keyword;  // 이미지에 키워드 정보 추가
+
+                        // 이미지 클릭 시 이벤트 추가
+                        imgElement.addEventListener('click', function() {
+                            // 이미지가 선택되었는지 확인
+                            const isSelected = imageWrapper.classList.contains('selected');
+
+                            // 이미지가 선택되었다면 선택 해제, 선택되지 않았다면 선택
+                            imageWrapper.classList.toggle('selected', !isSelected);
+                        });
+
+                        // div에 이미지 추가
+                        imageWrapper.appendChild(imgElement);
+                        imageContainer.appendChild(imageWrapper);
+                    });
+                } else {
+                    // 선택된 keyword에 해당하는 이미지가 없을 경우 처리
+                    const noImageMessage = document.createElement('p');
+                    noImageMessage.textContent = searchKeyword ?
+                        'No images found for the entered keyword.' :
+                        'Enter a keyword to search for images.';
+                    imageContainer.appendChild(noImageMessage);
+                }
+            });
+    }
+</script>
+
+</body>
+</html>

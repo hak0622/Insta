@@ -1,0 +1,65 @@
+
+@charset "UTF-8";
+
+body{
+  font-family: 'Do Hyeon', sans-serif;
+  color:#dbdbdb;
+}
+
+.wrap{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #c9c8c5;
+}
+
+.search_section{
+  order:1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+}
+
+.search_form h1{
+  order:1;
+  font-size: 30px;
+  color:white;
+}
+
+.search_form input{
+  order:2;
+  width:500px;
+  height:50px;
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+  border-radius: 8px;
+  color:gray;
+  border: 3px solid black;
+  margin-top: -5px;
+}
+
+.search_form input::placeholder {
+  color: #d4d3d2;
+  font-style: italic;
+}
+
+.search_form button{
+  order:3;
+  border:3px solid black;
+  border-radius: 6px;
+  background: #9e9e9e;
+  font-size: 30px;
+}
+
+.search_form h1, .search_form input, .search_form button{
+  display: inline;
+}
+
+.result_section{
+  order:2;
+  width: 100%;
+  background:white;
+}
